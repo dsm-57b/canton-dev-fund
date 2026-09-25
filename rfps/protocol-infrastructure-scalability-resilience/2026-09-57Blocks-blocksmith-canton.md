@@ -21,7 +21,7 @@ The product is the deterministic CLI. No API key, no model, and no assistant are
 
 BlockSmith composes official Splice artifacts rather than vendoring, forking, or replacing them. This grant covers the Docker Compose path (`validator_compose`); Kubernetes/Helm parity is a named follow-on proposal, and PQS is not touched. Apache 2.0.
 
-This proposal supersedes [#84](https://github.com/canton-foundation/canton-dev-fund/pull/84), narrowed to one module in response to reviewer feedback and the published 2026–2028 RFPs. The request keeps #84's 375,000 CC figure, which at the current Canton Coin price is a materially smaller dollar ask — a smaller grant for a smaller, faster scope.
+This proposal supersedes [#84](https://github.com/canton-foundation/canton-dev-fund/pull/84), narrowed to one module in response to reviewer feedback and the published 2026–2028 RFPs. The request keeps #84's 375,000 CC figure, which at the current Canton Coin price is a materially smaller dollar ask, a smaller grant for a smaller, faster scope.
 
 A working prototype already runs on 57Blocks' own DevNet validator. Two recordings are linked below so reviewers can watch the default CLI path and the optional `ask` path. They are preview evidence, not a milestone claim. The grant pays for opening the tool, finishing the one missing command, and publishing TestNet and MainNet-ready dogfood the rest of the network can replay.
 
@@ -41,7 +41,7 @@ A working prototype already runs on 57Blocks' own DevNet validator. Two recordin
 
 ### 1. Objective
 
-An operator can onboard a validator to a live Canton network, verify its readiness from evidence, and perform every subsequent lifecycle mutation through a reviewable plan — without a support channel, a committee thread, a pile of ad-hoc scripts, or an AI provider.
+An operator can onboard a validator to a live Canton network, verify its readiness from evidence, and perform every subsequent lifecycle mutation through a reviewable plan, without a support channel, a committee thread, a pile of ad-hoc scripts, or an AI provider.
 
 Self-service onboarding and capacity assessment answer RFP 7. Reviewable day-2 mutations answer RFP 23. The assistant is optional and is not a second objective.
 
@@ -53,12 +53,12 @@ Three installables, one workspace: `blocksmith-canton` (operator CLI, laptop or 
 
 - `init` creates a workspace: environment, deployment shape, sizing and dependency checks. State survives the multi-week ceremony; the operator closes the laptop and resumes.
 - `onboard notify` generates the Foundation form payloads. `onboard quorum` proves allowlist membership from live evidence: 2/3 unique Scan HTTP and sequencer `SERVING` answers, measured from the notified egress IP. Bookkeeping never gates a probe, and a failing probe demotes stale evidence so a later step cannot run on it.
-- `up --plan` inspects the official Splice bundle and ceremony state and prints a numbered plan with its hash — including the literal shell recipe for operators who prefer to run every command by hand. `up --apply` requires the reviewed hash.
+- `up --plan` inspects the official Splice bundle and ceremony state and prints a numbered plan with its hash, including the literal shell recipe for operators who prefer to run every command by hand. `up --apply` requires the reviewed hash.
 
 **Reviewable day-2 mutations (RFP 23).**
 
 - `upgrade` plans a version-agnostic upgrade against the official release asset and its published SHA-256 digest, budgets backup and disk, takes a cold database volume archive as an exact rollback point, and requires ledger progress after start. `upgrade-restore` returns to that archive.
-- `reclaim` frees disk by removing leftover images, leftover containers, and leftover BlockSmith operation directories — never the running version, never the live project, never the newest reset or upgrade rollback.
+- `reclaim` frees disk by removing leftover images, leftover containers, and leftover BlockSmith operation directories, never the running version, never the live project, never the newest reset or upgrade rollback.
 - `harden`, `reset`/`reset-restore`, and `reonboard` (recovery of a `MemberDisabled` identity) follow the same plan/hash/apply contract.
 - `doctor`, `status`, `logs --why`, and `collect-diagnostics` are read-only. `doctor` reads ledger progress from the participant store: `readyz=200` without recent sequenced events is reported as up but not on the network.
 
@@ -68,7 +68,7 @@ Three installables, one workspace: `blocksmith-canton` (operator CLI, laptop or 
 
 **Assistant, optional and strictly read-only.**
 
-- `ask` is not the product and is not required to use the product. It answers operator questions over a small MCP server started on the validator via the operator's existing SSH session. No new port, no daemon, no LLM on the validator, and it never applies a plan. Every deterministic command works identically without it. The default invocation of the CLI will be the command list and help — not the assistant.
+- `ask` is not the product and is not required to use the product. It answers operator questions over a small MCP server started on the validator via the operator's existing SSH session. No new port, no daemon, no LLM on the validator, and it never applies a plan. Every deterministic command works identically without it. The default invocation of the CLI will be the command list and help, not the assistant.
 
 We validate against 57Blocks' own validator across DevNet, TestNet, and a MainNet-ready configuration, and publish recordings and logs so reviewers evaluate a working flow, not a sketch.
 
@@ -82,7 +82,7 @@ Named as candidate follow-on proposals: Kubernetes/Helm parity, policy-gated rem
 
 - Composes official Splice artifacts; no protocol, Splice, or node changes required.
 - Evidence over attestation matches the roadmap's zero-trust posture: the tool never asks the operator to assert what it can probe.
-- Plan-before-mutate with `--show-commands` keeps the operator, not the tool, in control of a production validator — including operators who choose to copy the commands and never run `--apply` at all.
+- Plan-before-mutate with `--show-commands` keeps the operator, not the tool, in control of a production validator, including operators who choose to copy the commands and never run `--apply` at all.
 - The default path has no model dependency. `ask` is an optional laptop-side client over a short-lived stdio MCP process. The validator-side component is started by SSH and gone when the session ends. No new port, no TLS certificate, no daemon.
 
 ### 4. Backward Compatibility
@@ -141,7 +141,7 @@ Dogfood on 57Blocks' validator is how we prove each command. The published repos
 
 - **Milestone 1:** The repository is public under Apache 2.0. 57Blocks' DevNet validator is healthy (API responsive, ledger advancing, quorum proven) through the published CLI and runbooks, with no model. Bring-up recordings and logs are in that repository so other operators can replay the flow.
 - **Milestone 2:** Published evidence from 57Blocks' validator: one full upgrade with verified artifacts and a demonstrated restore from the cold archive; one `reclaim` and one `harden` through the plan/hash gate; `scale --plan` produces a sizing recommendation from live disk, memory, and ACS growth. Restore is inspectable with `--plan --show-commands` before `--apply`. TestNet promotion completed through the tool.
-- **Milestone 3:** The full grant command set has been run on 57Blocks' live validator — not a sandbox — and the recordings, plans, and logs are published so any reviewer or operator can replay the lifecycle without `ask`. The maintenance plan is public.
+- **Milestone 3:** The full grant command set has been run on 57Blocks' live validator, not a sandbox, and the recordings, plans, and logs are published so any reviewer or operator can replay the lifecycle without `ask`. The maintenance plan is public.
 
 ---
 
@@ -155,7 +155,7 @@ Dogfood on 57Blocks' validator is how we prove each command. The published repos
 - Milestone 2 _(Lifecycle, capacity, TestNet)_: 175,000 CC upon committee acceptance
 - Milestone 3 _(MainNet-ready dogfood)_: 100,000 CC upon final release and acceptance
 
-This keeps #84's CC figure while the scope narrowed. At the ~$0.10 30-day average at submission it represents roughly $37,500 — versus roughly $60,000 at the $0.16 anchor when #84 was filed. We consider that the right shape for this RFP area: a focused module, a smaller grant, and results in weeks rather than quarters, with each milestone independently verifiable before the next is funded.
+This keeps #84's CC figure while the scope narrowed. At the ~$0.10 30-day average at submission it represents roughly $37,500, versus roughly $60,000 at the $0.16 anchor when #84 was filed. We consider that the right shape for this RFP area: a focused module, a smaller grant, and results in weeks rather than quarters, with each milestone independently verifiable before the next is funded.
 
 57Blocks funds continued quarterly maintenance windows for 12 months after Milestone 3 within this request.
 
@@ -200,6 +200,6 @@ More than one implementation for validator operations is healthy for the network
 | Canton CRO ([#573](https://github.com/canton-foundation/canton-dev-fund/pull/573)), CantonVet ([#746](https://github.com/canton-foundation/canton-dev-fund/pull/746)) | Party replication and DAR vetting are out of our scope by design. |
 | Bare Metal Toolkit ([#462](https://github.com/canton-foundation/canton-dev-fund/pull/462)) | Bare-metal systemd path. BlockSmith covers the containerized path. Complementary deployment shapes. |
 
-**Why narrower than #84.** That filing described a full operator platform. Reviewers asked for a concrete product and a clear difference from existing work. Since then the Foundation published the RFPs, which fund focused modules, and adjacent slices we had listed — dashboards, health ranges, configuration assessment, PQS operation — are now accepted or champion-confirmed elsewhere. This filing keeps the original ask and concentrates it on the lane that is still open.
+**Why narrower than #84.** That filing described a full operator platform. Reviewers asked for a concrete product and a clear difference from existing work. Since then the Foundation published the RFPs, which fund focused modules, and adjacent slices we had listed (dashboards, health ranges, configuration assessment, PQS operation) are now accepted or champion-confirmed elsewhere. This filing keeps the original ask and concentrates it on the lane that is still open.
 
-57Blocks is a 300-engineer firm focused on Web3 infrastructure. We operate our own Canton validator and built this tool against our own DevNet bring-up — every failure mode in this proposal is one we hit ourselves. BlockSmith is 57Blocks' toolchain brand: [blocksmith.co](https://www.blocksmith.co/) is the same one-workflow idea for Stellar Soroban developers; this proposal is its Canton edition, for validator operators. Deliverables, code, and documentation are produced and reviewed by our human engineering team, with AI-assisted development used as standard practice under the repository's AI policy.
+57Blocks is a 300-engineer firm focused on Web3 infrastructure. We operate our own Canton validator and built this tool against our own DevNet bring-up, and every failure mode in this proposal is one we hit ourselves. BlockSmith is 57Blocks' toolchain brand: [blocksmith.co](https://www.blocksmith.co/) is the same one-workflow idea for Stellar Soroban developers; this proposal is its Canton edition, for validator operators. Deliverables, code, and documentation are produced and reviewed by our human engineering team, with AI-assisted development used as standard practice under the repository's AI policy.
